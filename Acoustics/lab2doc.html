@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lab 2: Speaker Characterization</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; margin: 2rem; }
+    h1, h2, h3, h4 { font-family: "Segoe UI", Arial, sans-serif; }
+    table { border-collapse: collapse; margin: 1rem 0; width: 100%; max-width: 700px; }
+    th, td { border: 1px solid #444; padding: 0.4rem 0.6rem; text-align: left; }
+    th { background-color: #f0f0f0; }
+    caption { font-weight: bold; margin-bottom: 0.4rem; }
+    figure { margin: 1.5rem 0; }
+    figcaption { font-style: italic; margin-bottom: 0.3rem; }
+    code { font-family: Consolas, monospace; }
+  </style>
+</head>
+<body>
+
+  <h1>Lab 2: Speaker Characterization</h1>
+
+  <h2>Objective</h2>
+  <p>
+    Determine the physical characteristics of a speaker and speaker box. This lab is based upon a
+    Freshmen Year Experience course at Penn State University.
+  </p>
+
+  <h2>Equipment List and Setup</h2>
+
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+    </tr>
+    <tr>
+      <td>speaker</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>speaker box</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>frequency generator</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>multimeter &amp; probes</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>100&nbsp;Ω resistor</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>digital oscilloscope</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>electronic switching box</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>5 gram masses</td>
+      <td>5</td>
+    </tr>
+  </table>
+
+  <figure>
+    <figcaption>Illustrative figure (not included in this text extraction).</figcaption>
+  </figure>
+
+  <h3>Theory</h3>
+  <p>
+    A speaker is a beautiful electromechanical system. Magnetic force is exerted when AC current
+    flows through a coil of wire in a magnetic field. The coil is attached to a paper cone which is
+    connected to a flexible surround and finally to the speaker frame. The flexible surround has a
+    spring constant and the wire coil plus cone has a mass so you can imagine there will be a
+    resonance frequency for the system in addition to mechanical damping. The first part of this
+    lab will be devoted to finding this resonance frequency and the second to determining the
+    mechanical damping.
+  </p>
+  <p>
+    We don't want to destroy the speaker to determine the mass of the coil, the suspension's spring
+    constant or the mechanical resistance of the system. These values are important for modeling
+    the speaker's performance in a speaker box (which has its own acoustic properties!), experiment
+    or audio environment. Additionally, the measurement of these values on a production line gives
+    a means of on-the-spot quality control and testing. The method we will employ in this lab is
+    generally called non-destructive testing.
+  </p>
+
+  <h4>Effective Mass and Stiffness</h4>
+  <p>
+    We can be clever and note that for a simple mass and spring we have the relationship
+  </p>
+  <p>
+    <code>f₀ = (1 / 2π) √(s / m₀)</code>,
+  </p>
+  <p>
+    where <code>s</code> is the effective spring constant of the speaker and <code>m₀</code> is its effective mass.
+    We can easily change the effective mass of the system by adding mass to the dome of the speaker.
+    This would result in a new resonance frequency. Hence,
+  </p>
+  <p>
+    <code>f₁ = (1 / 2π) √(s / (m₀ + m₁))</code>.
+  </p>
+  <p>
+    This can be rearranged and solved for the period-squared,
+  </p>
+  <p>
+    <code>T² = (4π² / s)(m₀ + m₁)</code>,
+  </p>
+  <p>
+    which looks like the equation for a straight line with slope equal to <code>4π² / s</code> and
+    y-intercept equal to <code>(4π² m₀) / s</code>. Thus, by determining the resonance frequencies for the
+    system with various added masses we can determine the unknown effective mass <code>m₀</code> and the
+    effective stiffness (spring constant) <code>s</code>.
+  </p>
+
+  <h4>Mechanical Resistance</h4>
+  <p>
+    To determine the mechanical resistance of the speaker we need to measure its decaying oscillations
+    as a function of time. To do so we remove all masses from the speaker dome and retune the drive
+    frequency to the resonance frequency. To measure the free decay oscillations we'll make use of a
+    switch box. When the switch is thrown it will disconnect the signal generator from the speaker
+    and tell the digital oscilloscope to capture the resulting damped oscillations. These oscillations
+    are measured by the oscilloscope hooked up to the speaker's voice coil. As the voice coil moves in
+    the gap between the poles of the speaker's magnet a voltage is induced due to Faraday's Law.
+    The oscilloscope records this voltage on its screen. Note that we are measuring the mechanical
+    resistance, not mechanical and electrical resistance!
+  </p>
+  <p>
+    Recall that the exponential decay of the velocity amplitude for the system is given by
+  </p>
+  <p>
+    <code>u_max(t) = u₀ e<sup>-βt</sup></code>,
+  </p>
+  <p>
+    where <code>β = Rₘ / (2 m₀) = 1 / τ</code> with <code>Rₘ</code> as the mechanical resistance, <code>m₀</code> is the speaker's
+    effective moving mass and <code>τ</code> is the time constant which is the time for the amplitude to decay
+    to <code>1/e</code> of its initial value. However, the voltage we measure is proportional to the velocity of
+    the coil. Luckily, we are only interested in the time constant, not the leading constant which
+    would depend on the magnetic field strength and the number of coils (i.e., the BL factor!).
+    Hence, we can write for the decaying voltage signal
+  </p>
+  <p>
+    <code>V_max(t) = V₀ e<sup>-βt</sup></code>.
+  </p>
+  <p>
+    We will use the cursors on the digital oscilloscope screen to locate the voltage peak and trough
+    values and their corresponding times. Let's label the peaks and troughs with the index <code>n</code>.
+    Now, we can write
+  </p>
+  <p>
+    <code>Vₙ(t) = V₀ e<sup>-β tₙ</sup></code>.
+  </p>
+
+  <table>
+    <caption>Table 1: Free Decay Data Table</caption>
+    <tr>
+      <th>n</th>
+      <th>tₙ</th>
+      <th>Vₙ</th>
+      <th>ln(Vₙ)</th>
+    </tr>
+    <tr>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0.5</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.5</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <p>
+    Lastly, we can take the natural log of both sides to make a linear function which yields
+  </p>
+  <p>
+    <code>ln(|Vₙ|) = ln(V₀) - β tₙ</code>.
+  </p>
+  <p>
+    The slope of the best fit line through <code>tₙ</code> vs <code>ln(|Vₙ|)</code> equals <code>-β</code> which is related to
+    <code>Rₘ</code> via <code>β = Rₘ / (2 m₀)</code>.
+  </p>
+
+  <h2>Procedure</h2>
+  <p>
+    We will test a 10-inch woofer and its closed speaker box. Be careful to always use a current
+    limiting resistor (100&nbsp;Ω) with the speaker during the resonance frequency tests to avoid
+    damaging the voice coil. Remove the resistor when doing the free decay experiment.
+  </p>
+
+  <h3>Effective Mass and Stiffness</h3>
+  <p>
+    Turn on the oscilloscope and signal generator. Set the signal generator to give a peak-to-peak
+    voltage of 10 V. Use the BNC-to-Alligator Clip cables to connect the signal generator, speaker,
+    current limiting resistor and oscilloscope as illustrated in Fig. 1.
+  </p>
+
+  <figure>
+    <figcaption>Figure 1: Setup for determining the effective mass and stiffness of the woofer.</figcaption>
+    <p>(Diagram not included in this text extraction.)</p>
+  </figure>
+
+  <ol>
+    <li>
+      Start with the frequency generator set to 30 Hz. Turn the knob on the signal generator to
+      change the frequency. The oscilloscope should be displaying a sine wave that represents the
+      voltage across the speaker voice coil.
+    </li>
+    <li>
+      Increase the frequency by turning the knob. You should see the wave on the screen increase
+      in amplitude. Continue adjusting the frequency until the amplitude is at a maximum. You
+      may need to adjust the horizontal and vertical scaling.
+    </li>
+    <li>
+      Record this frequency and the amount of added mass (0 g in this case) in a data table.
+    </li>
+    <li>
+      Decrease the frequency and add 5 g to the center of the speaker's dome. Again find the
+      resonance frequency by observing the speaker's response on the screen.
+    </li>
+    <li>
+      Repeat this process until you have added 30 g to the speaker dome.
+    </li>
+  </ol>
+
+  <p>
+    When you are done with the data collection, plot and analyze the data as suggested above in the
+    theory section. Determine the effective mass <code>m₀</code> and the effective stiffness <code>s</code> of this speaker.
+    Now, place the speaker into the speaker box (minus the foam) making sure you have connected
+    the electrical wiring correctly and securely screw the speaker into position. Repeat the above
+    procedure with the added mass to again determine the effective mass and effective stiffness.
+    What does the speaker box do, if anything, to these quantities? Why do you think this happens?
+    Do it again with fluff in the box!
+  </p>
+
+  <h3>Mechanical Resistance</h3>
+  <p>
+    Remove the speaker from the speaker box and set the function generator to the <code>m₀</code> resonance
+    frequency (that is, the resonance frequency with zero added mass) and 3 V<sub>pp</sub>. Use the
+    BNC-to-BNC cables to make the following connections between the speaker, signal generator,
+    oscilloscope, and switch box.
+  </p>
+
+  <h4>Switch Box Connections</h4>
+  <ol>
+    <li>Connect the “Scope” BNC to the oscilloscope “Ch. 1” input.</li>
+    <li>Connect the “Trig.” BNC to the oscilloscope’s “External Trigger” input.</li>
+    <li>Connect the voice coil of the speaker to the “Coil” BNC.</li>
+    <li>Connect the “Gen.” BNC to the signal output of the function generator.</li>
+    <li>Set the switch to the “Drive” position (green LED should be on).</li>
+  </ol>
+
+  <h4>External Trigger Oscilloscope</h4>
+  <p>
+    To acquire a single free-decay waveform, the oscilloscope has to trigger on the signal from the
+    switch box (there is a 9 V DC battery inside).
+  </p>
+  <ol>
+    <li>
+      Press the “Mode/Coupling” button, then use the soft keys to the right of the display to
+      choose the following options: Mode → Sweep, Coupling → DC, triggering source → External.
+    </li>
+    <li>
+      Use the “Horizontal” knob to increase the sweep time to 20 msec/div so that more of the
+      exponentially decaying waveform will be displayed.
+    </li>
+  </ol>
+
+  <p>
+    When the above preparations are complete you are ready to acquire data. Flip the switch and
+    observe the screen. You should observe a decaying sinusoidal wave. Flip the switch gently a few
+    times, waiting a second or so between flips until you have a quality graph with many oscillations.
+    You may need to adjust the horizontal and vertical scale to observe more of the wave on the screen.
+  </p>
+  <p>
+    Once you have a nice decaying sinusoidal graph press the “Cursor” key and use the soft keys
+    to the right of the display to set Mode → Track. Now push the soft key to the right of CurA.
+    Note the similar circle-arrow that is lit up on the right side of the oscilloscope. Turn this knob
+    and the cursor should track the waveform. The values of voltage and time should be displayed
+    on the screen. Use the cursor to find the peak and trough values and the times at which they
+    occur. This is the data that fills in Table 1.
+  </p>
+
+</body>
+</html>
