@@ -1,4 +1,4 @@
-DataPtNum,Frequency, Vin(V), Vout(V), phase, Gain(|Vin/Vout|)
+DataPtNum,Frequency, Vin(V), Vout(V), phase, Gain(|Vout/Vin|)
 1, 40, 10.2, 0.023, 108.0, 
 2, 45, 10.2, 0.023, 108.0, 
 3, 50, 10.2, 0.028, 158.0, 
