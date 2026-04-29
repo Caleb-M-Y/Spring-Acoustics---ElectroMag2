@@ -1,0 +1,3 @@
+Parameter, Angle (degrees), Notes
+Prism Angle (theta_1), 20, Physical angle of the prism
+Measured Max Angle (theta), 19, Angle read from goniometer at peak signal
