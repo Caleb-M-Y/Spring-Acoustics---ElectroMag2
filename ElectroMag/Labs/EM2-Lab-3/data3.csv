@@ -1,0 +1,3 @@
+Cable_Type,New_Incident_V_mV,New_Reflected_V_mV,New_Round_Trip_Time_ns,Pulse_Behavior
+Coaxial,460,-345,512,Flips negative
+Twin_Lead,698.9,-276.6,310,Flips negative

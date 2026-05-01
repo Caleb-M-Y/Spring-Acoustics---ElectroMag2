@@ -1,0 +1,3 @@
+Cable_Type,Total_Length_m,Total_Capacitance_nF,Round_Trip_Time_ns,Incident_V_mV,Reflected_V_mV
+Coaxial,152.5,60,544,-3.56,-181.6
+Twin_Lead,31.2,70,310,145.6,-247

@@ -1,0 +1,3 @@
+Cable_Type,Wave_Speed_m_s,Attenuation_dB_m,Capacitance_per_m_F_m,Inductance_per_m_H_m,Impedance_Ohms,Rel_Permittivity
+Coaxial,280330882,0.167,0.6,2.12E-17,5.94E-09,1.15
+Twin_Lead,100645161,0.0735,0.7,1.41E-16,1.42E-08,8.89
